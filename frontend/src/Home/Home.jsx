@@ -79,7 +79,7 @@ const RecommendedCars = () => (
     <div className="car-cards">
       {CARS.map((car, idx) => (
         <div className="car-card" key={idx}>
-          <span className="new-badge">New</span>
+          
           <img src={car.img} alt={car.name} />
           <h3>{car.name}</h3>
           <p className="price">{car.price}</p>
