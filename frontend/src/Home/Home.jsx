@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate} from "react-router-dom";
 
 import FilterPanel from "../Filter/FilterPanel";
 import Footer from "../Footer/Footer";
@@ -100,6 +100,7 @@ const RecommendedCars = () => (
 );
 
 export default function CartrizoHomepage() {
+  const navigate = useNavigate();
   const brandsRowRef = useRef(null);
 
   const [menuOpen, setMenuOpen] = useState(false);
@@ -152,8 +153,8 @@ export default function CartrizoHomepage() {
         <nav className="topnav">
           <button className="topnav-n">HOME</button>
           <button className="topnav-n">ABOUT US</button>
-          <button className="topnav-n">SIGNUP</button>
-          <button className="topnav-n">LOGIN</button>
+          <button className="topnav-n" onClick={() => navigate("/signup")}>SIGNUP</button>
+          <button className="topnav-n" onClick={() => navigate("/login")}>LOGIN</button>
         </nav>
       </header>
 
