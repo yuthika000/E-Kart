@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 import carImg from "../assets/car.jpg";
 import "./Signup.css";
@@ -9,24 +9,42 @@ import "./Signup.css";
 export default function Signup() {
   const navigate = useNavigate();
 
-  // Handle Google login success
-  const handleGoogleSuccess = (response) => {
-    try {
-      const user = jwtDecode(response.credential);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-      console.log("Google User:", user);
+  // NORMAL SIGNUP
+  const handleSignup = async () => {
+    const res = await fetch("http://localhost:5000/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    });
 
-      alert(`Welcome ${user.name}`);
+    const data = await res.json();
+    alert(data.message);
 
-      // Navigate to info page after successful login
-      navigate("/info");
-    } catch (error) {
-      console.error("JWT Decode Error:", error);
-      alert("Google Sign In Failed");
-    }
+    if (res.ok) navigate("/info");
   };
 
-  // Handle Google login failure
+  // GOOGLE SIGNUP
+  const handleGoogleSuccess = async (response) => {
+    const user = jwtDecode(response.credential);
+
+    await fetch("http://localhost:5000/google-login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: user.name,
+        email: user.email,
+      }),
+    });
+
+    alert(`Welcome ${user.name}`);
+    navigate("/info");
+  };
+
+  // ✅ FIXED: GOOGLE ERROR HANDLER
   const handleGoogleError = () => {
     alert("Google Sign In Failed");
   };
@@ -50,12 +68,24 @@ export default function Signup() {
           <p className="subtitle">Register to explore our website</p>
 
           <div className="form-group">
-            <input type="text" placeholder="Username" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+            <input
+              type="text"
+              placeholder="Username"
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
 
-          <button className="signup-btn" onClick={() => navigate("/info")}>
+          <button className="signup-btn" onClick={handleSignup}>
             Signup
           </button>
 
@@ -65,7 +95,7 @@ export default function Signup() {
             <span></span>
           </div>
 
-          {/* GOOGLE LOGIN BUTTON */}
+          {/* GOOGLE LOGIN */}
           <GoogleLogin
             onSuccess={handleGoogleSuccess}
             onError={handleGoogleError}
@@ -76,7 +106,6 @@ export default function Signup() {
             <Link to="/login"> Login</Link>
           </p>
         </div>
-
       </div>
     </div>
   );

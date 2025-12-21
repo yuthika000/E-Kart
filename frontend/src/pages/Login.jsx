@@ -9,6 +9,9 @@ import "./Login.css";
 
 export default function Login() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+
 
   // CAPTCHA state
   const [captcha, setCaptcha] = useState("");
@@ -43,12 +46,26 @@ export default function Login() {
   };
 
   // Handle login button click
-  const handleLogin = () => {
-    if (verifyCaptcha()) {
-      // Proceed with login logic (email/password verification)
-      navigate("/info");
-    }
-  };
+  const handleLogin = async () => {
+  if (!verifyCaptcha()) return;
+
+  const res = await fetch("http://localhost:5000/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email: email,
+      password: password
+    })
+  });
+
+  const data = await res.json();
+  alert(data.message);
+
+  if (res.ok) {
+    navigate("/info");
+  }
+};
+
 
   // Handle Google login success
   const handleGoogleSuccess = (response) => {
@@ -94,8 +111,20 @@ export default function Login() {
           </p>
 
           <div className="form-group">
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+            <input
+  type="email"
+  placeholder="Email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+/>
+
+<input
+  type="password"
+  placeholder="Password"
+  value={password}
+  onChange={(e) => setPassword(e.target.value)}
+/>
+
 
             {/* CAPTCHA ROW */}
             <div className="captcha-row">
