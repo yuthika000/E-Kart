@@ -7,7 +7,8 @@ import AboutUs from "./pages/Aboutus";
 import RateUs from "./Rate/Rateus";
 import ProfileInfo from "./pages/info";
 import Profile from "./pages/Profile";
-
+import SellCar from "./SellCars/SellCar";
+import UsedCar from "./UsedCars/UsedCar"
 function App() {
   return (
     <Routes>
@@ -18,6 +19,8 @@ function App() {
       <Route path="/rate-us" element={<RateUs />} />
       <Route path="/info" element={<ProfileInfo />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/sell-cars" element={<SellCar />} />
+       <Route path="/used-cars" element={<UsedCar />} />
     </Routes>
   );
 }

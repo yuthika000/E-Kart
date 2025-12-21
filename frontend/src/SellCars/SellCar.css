@@ -1,0 +1,154 @@
+/* FULL PAGE BACKGROUND IMAGE */
+/* FORCE ALL TEXT WHITE INSIDE SELL FORM */
+.sell-form,
+.sell-form h2,
+.sell-form h3,
+.sell-form p,
+.sell-form label,
+.sell-form span {
+  color: #ffffff;
+}
+.sell-page {
+  min-height: 100vh;
+  background: 
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)),
+    url("../assets/bg-car.jpg") center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+/* FORM BOX (REDUCED SIZE) */
+.sell-form {
+  background: #070707;
+  width: 100%;
+  max-width: 1000px; /* reduced */
+  border-radius: 14px;
+  padding: 25px;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 30px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+}
+
+/* LEFT PANEL */
+.sell-left {
+  background: linear-gradient(180deg, #0cc3d940, #141313);
+  border-radius: 12px;
+  padding: 25px;
+}
+
+.sell-left h2 {
+  color: #00c3d9;
+  font-size: 26px;
+}
+
+.breadcrumb {
+  font-size: 13px;
+  color: #ece6e6;
+}
+
+.sell-images {
+  margin-top: 30px;
+}
+
+.sell-images img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* RIGHT PANEL */
+.sell-right section {
+  margin-bottom: 22px;
+}
+
+.sell-right h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* INPUTS */
+input, textarea {
+  background: #1b1b1b;
+  border: 1px solid #333;
+  padding: 10px;
+  border-radius: 6px;
+  color: rgb(244, 236, 236);
+  width: 100%;
+}
+
+textarea {
+  height: 90px;
+  resize: none;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #00c3d9;
+}
+
+/* ROW */
+.row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+/* RADIO */
+.radio-group {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* FEATURES */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(150px, 1fr));
+  gap: 14px 30px;
+  margin-top: 10px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.feature-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #00c3d9;
+  cursor: pointer;
+}
+
+.feature-item span {
+  font-size: 14px;
+  color: white;
+}
+
+
+/* SUBMIT */
+.submit-btn {
+  grid-column: 1 / -1;
+  background: #00c3d9;
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background: #00b0c5;
+}
+
+/* RESPONSIVE */
+@media (max-width: 850px) {
+  .sell-form {
+    grid-template-columns: 1fr;
+  }
+}
