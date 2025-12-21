@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import AboutUs from "./pages/Aboutus";
 import RateUs from "./Rate/Rateus";
 import ProfileInfo from "./pages/info";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/about-us" element={<AboutUs />} />
       <Route path="/rate-us" element={<RateUs />} />
       <Route path="/info" element={<ProfileInfo />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 }

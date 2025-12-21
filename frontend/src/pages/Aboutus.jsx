@@ -66,16 +66,7 @@ export default function AboutUs() {
 
         
 
-        {/* SERVICES */}
-        <h3 className="about-service-title">Our Service</h3>
-
-        <div className="service-boxes">
-          <div className="service-box">Buy a new car</div>
-          <div className="service-box">Buy a used car</div>
-          <div className="service-box">Sell my car</div>
-          <div className="service-box">Car valuation</div>
-        </div>
-
+       
       </div>
     </div>
   );

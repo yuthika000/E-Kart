@@ -147,11 +147,11 @@ export default function CartrizoHomepage() {
           </div>
         </div>
         <nav className="topnav">
-          <button className="topnav-n">HOME</button>
+          <button className="topnav-n" onClick={() => navigate("/")}>HOME</button>
           <button className="topnav-n" onClick={() => navigate("/about-us")}>ABOUT US</button>
           <button className="topnav-n" onClick={() => navigate("/signup")}>SIGNUP</button>
           <button className="topnav-n" onClick={() => navigate("/login")}>LOGIN</button>
-          <button className="topnav-n">PROFILE</button>
+          <button className="topnav-n" onClick={() => navigate("/profile")}>PROFILE</button>
 
         </nav>
       </header>
