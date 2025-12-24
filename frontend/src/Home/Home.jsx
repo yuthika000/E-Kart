@@ -8,7 +8,7 @@ import "./Home.css";
 
 /* ==== Images ==== */
 import hero from "../assets/hero.jpg";
-import audi from "../assets/brands/audi.png";
+import audi from "../assets/brands/honda.png";
 import bmw from "../assets/brands/bmw.jpg";
 import lamborghini from "../assets/brands/lamborghini.jpg";
 import ford from "../assets/brands/ford.jpg";
@@ -152,6 +152,7 @@ export default function Home() {
       </div>
 
       {/* BRANDS SECTION */}
+     
       <section className="brands-shell" ref={brandsRef}>
         <h2 className="explore">Explore Brands</h2>
         <div className="brands-row">
@@ -170,6 +171,7 @@ export default function Home() {
           ))}
         </div>
       </section>
+      
 
       {/* RECOMMENDED CARS */}
       <section className="recommended-cars">

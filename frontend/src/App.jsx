@@ -10,6 +10,7 @@ import ProfileInfo from "./pages/info";
 import Profile from "./pages/Profile";
 import SellCar from "./SellCars/SellCar";
 import UsedCar from "./UsedCars/UsedCar";
+import CarDetails from "./pages/CarDetails";
 
 // Admin components
 import AdminLogin from "./Admin/AdminLogin";
@@ -27,6 +28,9 @@ function App() {
       <Route path="/profile" element={<Profile />} />
       <Route path="/sell-cars" element={<SellCar />} />
       <Route path="/used-cars" element={<UsedCar />} />
+
+   {/* ✅ ADD THIS */}
+      <Route path="/car/:id" element={<CarDetails />} />
 
       {/* Admin routes */}
       <Route path="/admin" element={<AdminLogin />} />

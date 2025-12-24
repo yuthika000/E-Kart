@@ -1,7 +1,57 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Profile.css";
 
-const Profile = () => {
+function Profile() {
+
+  const [profile, setProfile] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    gender: "",
+    state: "",
+    city: "",
+    pincode: "",
+    address: ""
+  });
+
+  const [editMode, setEditMode] = useState(false);
+
+  // Fetch profile from DB
+  useEffect(() => {
+    fetch("http://localhost:8080/api/profile")
+      .then(res => res.json())
+      .then(data => setProfile(data))
+      .catch(err => console.error(err));
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProfile((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSave = async () => {
+    try {
+      const res = await fetch("http://localhost:8080/api/profile", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(profile)
+      });
+
+      if (!res.ok) throw new Error("Update failed");
+
+      alert("Profile updated successfully!");
+      setEditMode(false);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to update profile");
+    }
+  };
+
+  if (!profile) return <p>Loading profile...</p>;
+
   return (
     <div className="profile-wrapper">
       <div className="profile-outer">
@@ -15,8 +65,8 @@ const Profile = () => {
               className="avatar"
             />
             <div>
-              <h4>Your name</h4>
-              <p>yourname@gmail.com</p>
+              <h4>{profile.fullName}</h4>
+              <p>{profile.email}</p>
             </div>
           </div>
 
@@ -25,7 +75,6 @@ const Profile = () => {
               <span>👤</span>
               <p>My Profile</p>
             </div>
-
             <div className="menu-item">
               <span>🚪</span>
               <p>Log Out</p>
@@ -39,52 +88,91 @@ const Profile = () => {
             <div className="user-info">
               <div className="avatar-circle"></div>
               <div>
-                <h4>Your name</h4>
-                <p>yourname@gmail.com</p>
+                <h4>{profile.fullName}</h4>
+                <p>{profile.email}</p>
               </div>
             </div>
             <span className="close">✕</span>
           </div>
 
           <div className="details">
+
             <div className="row">
               <span>Name</span>
-              <span className="value">your name</span>
+              {editMode ? (
+                <input
+                  name="fullName"
+                  value={profile.fullName}
+                  onChange={handleChange}
+                />
+              ) : (
+                <span className="value">{profile.fullName}</span>
+              )}
             </div>
 
             <div className="row">
-              <span>Email account</span>
-              <span className="value">yourname@gmail.com</span>
+              <span>Email</span>
+              <span className="value">{profile.email}</span>
             </div>
 
             <div className="row">
-              <span>Mobile number</span>
-              <span className="value add">Add number</span>
+              <span>Mobile</span>
+              {editMode ? (
+                <input
+                  name="phone"
+                  value={profile.phone}
+                  onChange={handleChange}
+                />
+              ) : (
+                <span className="value">{profile.phone}</span>
+              )}
             </div>
 
             <div className="row">
               <span>Location</span>
-              <span className="value">USA</span>
+              {editMode ? (
+                <input
+                  name="city"
+                  value={profile.city}
+                  onChange={handleChange}
+                />
+              ) : (
+                <span className="value">{profile.city}</span>
+              )}
             </div>
 
             <div className="row">
               <span>Gender</span>
-              <span className="value">Female</span>
+              {editMode ? (
+                <select
+                  name="gender"
+                  value={profile.gender}
+                  onChange={handleChange}
+                >
+                  <option>Male</option>
+                  <option>Female</option>
+                </select>
+              ) : (
+                <span className="value">{profile.gender}</span>
+              )}
             </div>
 
-            <div className="row">
-              <span>Age</span>
-              <span className="value">20</span>
-            </div>
+            {editMode ? (
+              <button className="save-btn" onClick={handleSave}>
+                Save Changes
+              </button>
+            ) : (
+              <button className="edit-btn" onClick={() => setEditMode(true)}>
+                EDIT
+              </button>
+            )}
 
-            <button className="save-btn">Save Changes</button>
-            <button className="edit-btn">EDIT</button>
           </div>
         </div>
 
       </div>
     </div>
   );
-};
+}
 
 export default Profile;

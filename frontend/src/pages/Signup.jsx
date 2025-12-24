@@ -21,7 +21,7 @@ export default function Signup() {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/signup", {
+      const res = await fetch("http://localhost:8080/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
@@ -41,7 +41,7 @@ export default function Signup() {
     try {
       const user = jwtDecode(response.credential);
 
-      const res = await fetch("http://localhost:5000/google-login", {
+      const res = await fetch("http://localhost:8080/google-login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -10,4 +10,9 @@ public class HomeController {
     public String test() {
         return "Backend is working!";
     }
+    
+    @GetMapping("/")
+    public String home() {
+        return "Backend is running";
+    }
 }
